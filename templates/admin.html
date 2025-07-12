@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add New Chula</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+  <h2>Add New Chula</h2>
+  <form method="POST">
+    <input type="text" name="chula_name" placeholder="Chula Name" required><br><br>
+    <textarea name="members" placeholder="Enter names separated by commas" required></textarea><br><br>
+    <button type="submit">Add Chula</button>
+  </form>
+  <br>
+  <a href="{{ url_for('home') }}">Back to Home</a>
+</body>
+</html>
