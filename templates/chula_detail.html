@@ -5,8 +5,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>{{ chula.name }}</h1>
     
+    <h2>Chula Name: {{ chula.name }}</h2>
+    <p><strong>Chula Head:</strong> {{ chula.head or "Not specified" }}</p>
     <h3>Family Members:</h3>
     <ul>
         {% for member in chula.members.split(',') %}
