@@ -5,9 +5,13 @@
 </head>
 <body>
     <h2>Edit Chula</h2>
+
     <form method="POST">
         <label for="name">Chula Name:</label><br>
         <input type="text" name="name" value="{{ chula.name }}" required><br><br>
+
+        <label for="head">Chula Head:</label><br>
+        <input type="text" name="head" value="{{ chula.head }}"><br><br>
 
         <label for="members">Family Members (comma-separated):</label><br>
         <textarea name="members" rows="4" cols="50" required>{{ chula.members }}</textarea><br><br>

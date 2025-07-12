@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Add New Chula</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
+    <title>Add New Chula</title>
 </head>
 <body>
-  <h2>Add New Chula</h2>
-  <form method="POST">
-    <label for="name">Chula Name:</label><br>
-    <input type="text" name="name" required><br><br>
+    <h2>Add New Chula</h2>
 
-    <label for="head">Chula Head:</label><br> <!-- ✅ New Field -->
-    <input type="text" name="head"><br><br>
+    <form method="POST">
+        <label for="name">Chula Name:</label><br>
+        <input type="text" name="name" required><br><br>
 
-    <label for="members">Family Members (comma-separated):</label><br>
-    <textarea name="members" rows="4" cols="50" required></textarea><br><br>
+        <label for="head">Chula Head:</label><br>
+        <input type="text" name="head"><br><br>
 
-    <button type="submit">Add Chula</button>
-</form>
+        <label for="members">Family Members (comma-separated):</label><br>
+        <textarea name="members" rows="4" cols="50" required></textarea><br><br>
 
-  <br>
-  <a href="{{ url_for('home') }}">Back to Home</a>
+        <button type="submit">Add Chula</button>
+    </form>
+
+    <br>
+    <a href="{{ url_for('home') }}">← Back to Chula List</a>
 </body>
 </html>
