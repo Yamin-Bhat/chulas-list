@@ -57,18 +57,20 @@ def logout():
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
-    if not session.get('admin'):
-        return redirect(url_for('login'))
+    if 'admin' not in session:
+        return "Access denied", 403
 
     if request.method == 'POST':
-        chula_name = request.form['chula_name']
+        name = request.form['name']
+        head = request.form['head']  # ✅ Get head
         members = request.form['members']
-        new_chula = Chula(name=chula_name, members=members)
+        new_chula = Chula(name=name, head=head, members=members)
         db.session.add(new_chula)
         db.session.commit()
         return redirect(url_for('home'))
 
-    return render_template('admin.html')
+    return render_template("admin.html")
+
 
 @app.route('/chula/<int:chula_id>')
 def view_chula(chula_id):
