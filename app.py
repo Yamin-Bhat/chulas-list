@@ -49,7 +49,7 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        if username == "admin" and password == "password":
+        if username == "yamin" and password == "13798012":
             session['admin'] = True
             return redirect(url_for('home'))
         else:
