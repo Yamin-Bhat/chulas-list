@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Poshpora Chulas</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Chulas of Poshpora</h1>
+    <div id="chula-list"></div>
+
+    <script>
+        fetch('/api/chulas')
+            .then(res => res.json())
+            .then(data => {
+                const container = document.getElementById('chula-list');
+                data.forEach(chula => {
+                    const div = document.createElement('div');
+                    div.innerHTML = `<h3>${chula.name}</h3>
+                                     <p><strong>Head:</strong> ${chula.head || 'N/A'}</p>
+                                     <p><strong>Members:</strong> ${chula.members.join(', ')}</p>`;
+                    container.appendChild(div);
+                });
+            });
+    </script>
+</body>
+</html>
