@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify , render_template
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -101,6 +101,9 @@ def update_chula(chula_id):
 
     return jsonify({"message": "Chula updated successfully"}), 200
 
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 
 
