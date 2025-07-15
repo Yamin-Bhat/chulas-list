@@ -19,9 +19,7 @@ class Chula(db.Model):
 with app.app_context():
     db.create_all()
 
-@app.route('/')
-def root():
-    return jsonify("Hey there , you are welcome"), 200
+
 
 
 # Test route
