@@ -6,13 +6,27 @@
 </head>
 <body>
     <h1>Chulas of Poshpora</h1>
+    <h2>Add New Chula</h2>
+<form id="chulaForm">
+    <input type="text" id="name" placeholder="Chula Name" required>
+    <input type="text" id="head" placeholder="Chula Head">
+    <input type="text" id="members" placeholder="Members (comma separated)" required>
+    <button type="submit">Add Chula</button>
+</form>
+<hr>
+
     <div id="chula-list"></div>
 
     <script>
+        <script>
+    // Fetch and display chulas
+    function loadChulas() {
         fetch('/api/chulas')
             .then(res => res.json())
             .then(data => {
                 const container = document.getElementById('chula-list');
+                container.innerHTML = '';  // Clear before reloading
+
                 data.forEach(chula => {
                     const div = document.createElement('div');
                     div.innerHTML = `<h3>${chula.name}</h3>
@@ -21,6 +35,39 @@
                     container.appendChild(div);
                 });
             });
+    }
+
+    // Handle form submit
+    document.getElementById('chulaForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const head = document.getElementById('head').value;
+        const members = document.getElementById('members').value;
+
+        fetch('/api/chulas', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: name,
+                head: head,
+                members: members
+            })
+        })
+        .then(res => res.json())
+        .then(response => {
+            alert(response.message || "Chula added!");
+            document.getElementById('chulaForm').reset();
+            loadChulas();  // Refresh list
+        })
+        .catch(err => console.error('Error:', err));
+    });
+
+    loadChulas();  // Initial load
+</script>
+
     </script>
 </body>
 </html>
