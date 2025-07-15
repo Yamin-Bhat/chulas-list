@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify , render_template
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -19,9 +19,7 @@ class Chula(db.Model):
 with app.app_context():
     db.create_all()
 
-@app.route('/')
-def root():
-    return jsonify("Hey there , you are welcome"), 200
+
 
 
 # Test route
@@ -101,8 +99,11 @@ def update_chula(chula_id):
 
     return jsonify({"message": "Chula updated successfully"}), 200
 
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True , port = 5001)
