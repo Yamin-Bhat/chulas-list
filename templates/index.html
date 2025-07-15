@@ -17,9 +17,9 @@
 
     <div id="chula-list"></div>
 
-    <script>
+    
         <script>
-     {
+     function loadChulas() {
         fetch('/api/chulas')
             .then(res => res.json())
             .then(data => {
@@ -67,6 +67,5 @@
     loadChulas();  // Initial load
 </script>
 
-    </script>
 </body>
 </html>
