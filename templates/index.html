@@ -6,15 +6,21 @@
 </head>
 <body>
     <h1>Chulas of Poshpora</h1>
-    <h2>Add New Chula</h2>
-<form id="chulaForm">
-    <input type="text" id="name" placeholder="Chula Name" required>
-    <input type="text" id="head" placeholder="Chula Head">
-    <input type="text" id="members" placeholder="Members (comma separated)" required>
-    <button type="submit">Add Chula</button>
-</form>
-<hr>
+    {% if is_admin %}
+        <p><a href="/logout">Logout</a></p>
 
+        <h2>Add New Chula</h2>
+        <form id="chulaForm">
+            <input type="text" id="name" placeholder="Chula Name" required>
+            <input type="text" id="head" placeholder="Chula Head">
+            <input type="text" id="members" placeholder="Members (comma separated)" required>
+            <button type="submit">Add Chula</button>
+        </form>
+    {% else %}
+        <p style="color:red;">You must <a href="/login">log in</a> to add chulas.</p>
+    {% endif %}
+<hr>
+<h2> All Chulas </h2>
     <div id="chula-list"></div>
 
     
@@ -37,35 +43,31 @@
     }
 
     // Handle form submit
-    document.getElementById('chulaForm').addEventListener('submit', function(e) {
-        e.preventDefault();
+    const form = document.getElementById('chulaForm');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                const head = document.getElementById('head').value;
+                const members = document.getElementById('members').value;
 
-        const name = document.getElementById('name').value;
-        const head = document.getElementById('head').value;
-        const members = document.getElementById('members').value;
+                fetch('/api/chulas', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, head, members })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    alert(data.message || "Chula added!");
+                    form.reset();
+                    loadChulas();
+                });
+            });
+        }
 
-        fetch('/api/chulas', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: name,
-                head: head,
-                members: members
-            })
-        })
-        .then(res => res.json())
-        .then(response => {
-            alert(response.message || "Chula added!");
-            document.getElementById('chulaForm').reset();
-            loadChulas();  // Refresh list
-        })
-        .catch(err => console.error('Error:', err));
-    });
-
-    loadChulas();  // Initial load
-</script>
-
+        loadChulas();
+    </script>
 </body>
 </html>
