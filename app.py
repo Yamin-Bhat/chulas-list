@@ -27,7 +27,7 @@ def login():
 @app.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))
 
 class Chula(db.Model):
     id = db.Column(db.Integer, primary_key=True)
