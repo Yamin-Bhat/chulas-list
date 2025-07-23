@@ -1,5 +1,10 @@
 from flask import Flask, request, jsonify , render_template , redirect , url_for , session
 from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
+import os
+
+load_dotenv() 
+ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD')
 
 app = Flask(__name__)
 
@@ -10,7 +15,7 @@ app.config['SECRET_KEY'] = 'supersecretkey'
 db = SQLAlchemy(app)
 
 ADMIN_USERNAME = 'YAMIN'
-ADMIN_PASSWORD = '91038'
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
