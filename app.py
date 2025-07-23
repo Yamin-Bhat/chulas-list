@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify , render_template
+from flask import Flask, request, jsonify , render_template , redirect , url_for , session
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -8,6 +8,26 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'supersecretkey'
 
 db = SQLAlchemy(app)
+
+ADMIN_USERNAME = 'YAMIN'
+ADMIN_PASSWORD = '91038'
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+            session['logged_in'] = True
+            return redirect(url_for('index'))
+        else:
+            return render_template('login.html', error='Invalid credentials')
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
 
 class Chula(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -101,7 +121,7 @@ def update_chula(chula_id):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html' , is_admin=session.get('logged_in', False))
 
 
 
