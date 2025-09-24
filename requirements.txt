@@ -1,5 +1,4 @@
-flask==3.0.0
-flask-sqlalchemy==3.0.0
-Flask-SQLAlchemy<2.0
+Flask
+Flask-SQLAlchemy
 python-dotenv==1.0.0
-dash
+SQLAlchemy<2.0
