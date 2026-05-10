@@ -6,7 +6,7 @@ import os
 
 load_dotenv() 
 ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD')
-ADMIN_USERNAME = 'YAMIN'
+ADMIN_USERNAME = os.getenv('ADMIN_USERNAME')
 app = Flask(__name__)
 
 db_path = os.path.join(app.instance_path, "chulas.db")
