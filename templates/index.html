@@ -159,7 +159,6 @@
   </nav>
 
   <div class="container mt-4">
-    <!-- Admin-only Add New Chula Form -->
     {% if is_admin %}
     <div class="card mb-4">
       <div class="card-header">Add New Chula</div>
@@ -196,7 +195,6 @@
     </div>
   </div>
 
-  <!-- Edit Chula Modal (Admin only) -->
   {% if is_admin %}
   <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
@@ -236,7 +234,6 @@
     const API_URL = "/api/chulas";
     const isAdmin = {{ is_admin|tojson }};
 
-    // Load and display chulas
     function loadChulas() {
       fetch(API_URL)
         .then(res => {
@@ -300,7 +297,6 @@
         });
     }
 
-    // Handle Add Form (Admin only)
     if (isAdmin) {
       const form = document.getElementById('chulaForm');
       if (form) {
@@ -338,13 +334,11 @@
         });
       }
 
-      // Edit modal functions
       window.openEditModal = function(chula) {
         document.getElementById('editChulaId').value = chula.id;
         document.getElementById('editName').value = chula.name;
         document.getElementById('editHead').value = chula.head || '';
         
-        // Handle members display in edit form
         let membersText = '';
         if (chula.members && Array.isArray(chula.members)) {
           membersText = chula.members.join(', ');
@@ -357,7 +351,6 @@
         modal.show();
       }
 
-      // Handle Edit Form
       const editForm = document.getElementById('editChulaForm');
       if (editForm) {
         editForm.addEventListener('submit', function(e) {
@@ -392,7 +385,6 @@
         });
       }
 
-      // Delete function
       window.deleteChula = function(id) {
         if (confirm('Are you sure you want to delete this chula?')) {
           fetch(`${API_URL}/${id}`, {
@@ -416,7 +408,6 @@
       }
     }
 
-    // Initial load
     loadChulas();
   </script>
 </body>
